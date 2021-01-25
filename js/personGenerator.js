@@ -93,7 +93,7 @@ const personGenerator = {
     // gender = randomValue(0, 1) == 1 ? 'Мужчина' : 'Женщина',  -Вариант использования тернарного оператора, но он не работает в нашем случае
 
     //  Метод случайной генерации Пола
-    randomGender: function (Gender_Parameter) {
+    randomGender: function () {
         this.randomIntNumber() == 0 ? this.Gender_Parameter = 'Мужчина' : this.Gender_Parameter = 'Женщина';
         return this.Gender_Parameter;
     },
@@ -107,11 +107,21 @@ const personGenerator = {
     //     }
     // },
 
-    //  Метод генерации Имени в зависимости от пола
-    randomFirstName: function (Gender_Parameter) {                    
-        if (Gender_Parameter == 'Мужчина') {
+    //  Метод генерации Имени в зависимости от пола, не работает
+    // randomFirstName: function (Gender_Parameter) {                    
+    //     if (Gender_Parameter == 'Мужчина') {
+    //         return this.randomValue(this.firstNameMaleJson);
+    //     } else {
+    //         return this.randomValue(this.firstNameFemaleJson);
+    //     }
+    // },
+
+    // Либо так
+    randomFirstName: function () {
+        if (this.Gender_Parameter == 'Мужчина') {
             return this.randomValue(this.firstNameMaleJson);
-        } else {
+        }
+        else if(this.Gender_Parameter == 'Женщина') {
             return this.randomValue(this.firstNameFemaleJson);
         }
     },
@@ -124,11 +134,11 @@ const personGenerator = {
     },
 
     // VAL Метод случайной генерации года рождения
-    randombirthYear: function() {
+    // randombirthYear: function() {
 
-        return this.birthYear_1;
+    //     return this.birthYear_1;
 
-    },
+    // },
 
     // метод getPerson продолжает выполнение в другом файле init.js
     getPerson: function () {
@@ -136,7 +146,7 @@ const personGenerator = {
         this.person.gender = this.randomGender(); //  Вывод Пола
         this.person.firstName = this.randomFirstName(); // Вывод Имени
         this.person.surname = this.randomSurname(); //  Вывод Фамилии
-        this.person.birthYear = this.randombirthYear(); //  Вывод года рождения
+        // this.person.birthYear = this.randombirthYear(); //  Вывод года рождения
 
         // возвращаем данные персоны
         return this.person;
