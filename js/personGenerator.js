@@ -58,80 +58,60 @@ const personGenerator = {
         }
     }`,
 
-    //  обнулить значение пола, вот только зачем, не понятно
-    Gender_Parameter: '',
-
     // переменные пола были изначально
-    // GENDER_MALE: 'Мужчина',
-    // GENDER_FEMALE: 'Женщина',
+    GENDER_MALE: 'Мужчина',
+    GENDER_FEMALE: 'Женщина',
 
-    // randomGender: function() {                          //  Метод случайной генерации Фамилии
-        
-    //     return this.randomValue(this.gender);
+    getPerson: function (gender) {
+        //создаем свойство person в объекте personGenerator, куда помещаем пока-что пустой объект
+        this.person = {};
+        //в personGenerator.person.gender сгенерируем случайный пол с помощью функции randomGender
+        this.person.gender = this.randomGender();// здесь будет либо "Мужчина" либо "Женщина"
+        //теперь, когда у нас уже есть конкретный сгенерированный пол, мы можем выбрать имя из того JSON, который соответствует сгенерированному полу, делаем это при помощи функции randomFirstName
+        let gender = this.person.gender;
+        this.person.firstName = this.randomFirstName(gender);
+        //возвращаем нашу персону
+        return this.person;
+    },
 
-    // },
-    
     // Math.random - случайная генерация. Math.floor - округление. Метод общий для всех.
     randomIntNumber: (max = 1, min = 0) => Math.floor(Math.random() * (max - min + 1) + min),
 
     // randomValue - преобразует строки из json в объект JS с помоцью свойства JSON.parse. Метод общий для всех.
+    // эта функция выбирает случайное значение из любого JSON
     randomValue: function (json) {
         const obj = JSON.parse(json);
         const prop = `id_${this.randomIntNumber(obj.count, 1)}`;  // this = personGenerator
         return obj.list[prop];
     },
 
-    // Либо:
-
-
-    // randomFirstName: function() {                        //  Метод случайной генерации Имени, которая была изначально
-
-    //     return this.randomValue(this.firstNameMaleJson);
-
-    // },
-
-    // gender = randomValue(0, 1) == 1 ? 'Мужчина' : 'Женщина',  -Вариант использования тернарного оператора, но он не работает в нашем случае
-
-    //  Метод случайной генерации Пола
+    // Метод случайной генерации Пола
+    //функция, которая генерирует случайный пол - при этом мы задействуем изначальные константы GENDER_MALE и GENDER_FEMALE
     randomGender: function () {
-        this.randomIntNumber() == 0 ? this.Gender_Parameter = 'Мужчина' : this.Gender_Parameter = 'Женщина';
-        return this.Gender_Parameter;
+        let random = Math.round(Math.random());
+        if (random) {
+            return this.GENDER_MALE;
+        } else {
+            return this.GENDER_FEMALE;
+        }
     },
 
-    // Либо так, как пишет Олег, но тоже не работает как надо
-    // randomFirstName: function (gender) {
-    //     if (gender == 'Мужчина') {
-    //         return this.randomValue(this.firstNameMaleJson);
-    //     } else {
-    //         return this.randomValue(this.firstNameFemaleJson);
-    //     }
-    // },
-
-    //  Метод генерации Имени в зависимости от пола, не работает
-    // randomFirstName: function (Gender_Parameter) {                    
-    //     if (Gender_Parameter == 'Мужчина') {
-    //         return this.randomValue(this.firstNameMaleJson);
-    //     } else {
-    //         return this.randomValue(this.firstNameFemaleJson);
-    //     }
-    // },
-
-    // Либо так
-    randomFirstName: function () {
-        if (this.Gender_Parameter == 'Мужчина') {
+    // Метод генерации Имени в зависимости от пола
+    //Функция, которая получает пол, как аргумент и в итоге выбирает нужный JSON - "мужской" или "женский"
+    randomFirstName: function (gender) {
+        if (gender == 'Мужчина') {
             return this.randomValue(this.firstNameMaleJson);
-        }
-        else if(this.Gender_Parameter == 'Женщина') {
+        } else {
             return this.randomValue(this.firstNameFemaleJson);
         }
     },
-       
-    //  Метод случайной генерации Фамилии
-    randomSurname: function() {
 
-        return this.randomValue(this.surnameJson);
+    // Метод случайной генерации Фамилии
+    // randomSurname: function() {
 
-    },
+    //     return this.randomValue(this.surnameJson);
+
+    // },
 
     // VAL Метод случайной генерации года рождения
     // randombirthYear: function() {
@@ -139,16 +119,8 @@ const personGenerator = {
     //     return this.birthYear_1;
 
     // },
-
-    // метод getPerson продолжает выполнение в другом файле init.js
-    getPerson: function () {
-        this.person = {};
-        this.person.gender = this.randomGender(); //  Вывод Пола
-        this.person.firstName = this.randomFirstName(); // Вывод Имени
-        this.person.surname = this.randomSurname(); //  Вывод Фамилии
-        // this.person.birthYear = this.randombirthYear(); //  Вывод года рождения
-
-        // возвращаем данные персоны
-        return this.person;
-    }
+    
+    
+    
+    
 };
