@@ -62,7 +62,7 @@ const personGenerator = {
     GENDER_MALE: 'Мужчина',
     GENDER_FEMALE: 'Женщина',
 
-    getPerson: function (gender) {
+    getPerson: function () {
         //создаем свойство person в объекте personGenerator, куда помещаем пока-что пустой объект
         this.person = {};
         //в personGenerator.person.gender сгенерируем случайный пол с помощью функции randomGender

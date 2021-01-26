@@ -6,8 +6,8 @@ window.onload = function()
     document.getElementById('genderOutput').innerText = initPerson.gender;
     document.getElementById('firstNameOutput').innerText = initPerson.firstName;
     // VAL добавили вывод Фамилии, пола, года:
-    document.getElementById('surnameOutput').innerText = initPerson.surname;
+    // document.getElementById('surnameOutput').innerText = initPerson.surname;
     
-    document.getElementById('birthYearOutput').innerText = initPerson.birthYear;
+    // document.getElementById('birthYearOutput').innerText = initPerson.birthYear;
 };
 
